@@ -309,7 +309,7 @@
                 if (window.location.href.indexOf("prefill") > -1) link += "?prefill=" + window.location.href.split("?prefill=")[1];
 				document.location.href = link;
 			}
-			else if (document.referrer.cookie === "FR" && document.location.href != "https://rocketelevatorsil.com/formulaire-de-soumission.html" && !window.location.href.includes("?prefill=")) {
+			else if (document.cookie === "FR" && document.location.href != "https://rocketelevatorsil.com/formulaire-de-soumission.html" && !window.location.href.includes("?prefill=")) {
                 var link = './formulaire-de-soumission.html';
                 if (window.location.href.indexOf("prefill") > -1) link += "?prefill=" + window.location.href.split("?prefill=")[1];
 				document.location.href = link;
