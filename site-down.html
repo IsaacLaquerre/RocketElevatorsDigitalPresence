@@ -2,9 +2,9 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Page Not Found - Error 404</title>
+		<title>Website Down - Error 503</title>
 		<link rel="icon" type="image/png" href="https://i.imgur.com/YgEfiVX.png">
-		<meta name="description" content="Error 404 page" />
+		<meta name="description" content="Error 503 Page" />
 		<meta name="Author" content="Isaac Laquerre [www.codeboxx.biz]" />
 		<!-- mobile settings -->
 		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
@@ -24,10 +24,6 @@
 			}
 		</style>
 		<script>
-		    if (window.location.href.indexOf("/undefined") > -1) {
-		        if (document.cookie === "EN") document.location.href = "./index.html";
-		        else if (document.cookie === "FR") document.location.href = "./index-fr.html";
-		    }
 			function goBack() {
 				window.history.back();
 			}
@@ -42,14 +38,15 @@
 			<section class="page-header">
 				<div class="container">
 
-					<h1>PAGE NOT FOUND - ERROR 404</h1>
+					<h1>WEBSITE DOWN - ERROR 503</h1>
 
 				</div>
 			</section>
+
 			<section class="section-xlg">
 				<div class="container">
 					
-					<p><strong>Sorry, the page you requested cannot be found!</strong></p>
+					<p><strong>Sorry, the website is currently down!</strong></p>
 					<button class="btn-default" title="Go back" id="goback" onclick="goBack()">return to previous page</button>
 					
 				</div>

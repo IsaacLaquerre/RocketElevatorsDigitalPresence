@@ -223,13 +223,13 @@
                     var maxOccupants = parseInt(document.getElementsByName("occupantsPerFloorNbr" + buildingLetter)[0].value);
                     var floorsNbr = parseInt(document.getElementsByName("floorsNbr" + buildingLetter)[0].value);
                     var totalOccupantsPerFloor = maxOccupants * floorsNbr;
-                    var totalShafts = Math.ceil(totalOccupantsPerFloor / 1000);
+                    var totalShafts = Math.floor(totalOccupantsPerFloor / 1000);
                     var basementsNbr = parseInt(document.getElementsByName("basementsNbr" + buildingLetter)[0].value);
                     var totalStories = floorsNbr + basementsNbr;
-                    var elevatorCollumns = Math.ceil(totalStories / 20);
-                    if (elevatorCollumns === 0) elevatorCollumns = 1;
-                    var totalElevators = totalShafts / elevatorCollumns || 0;
-
+                    var elevatorCollumns = Math.floor(totalStories / 20);
+                    if (elevatorCollumns < 1) elevatorCollumns = 1;
+                    var totalElevators = Math.round(totalShafts / elevatorCollumns);
+                    
                     var priceTotal = numberWithCommas(((result * totalElevators) + fee).toFixed(2))
                     if (totalElevators === 0) priceTotal = 0;
                     document.getElementById("costTotal").value = "$" + priceTotal.toString().replace(/NaN/g, "0");
@@ -280,17 +280,19 @@
                     var maxOccupants = parseInt(document.getElementsByName("occupantsPerFloorNbr" + buildingLetter)[0].value);
                     var floorsNbr = parseInt(document.getElementsByName("floorsNbr" + buildingLetter)[0].value);
                     var totalOccupantsPerFloor = maxOccupants * floorsNbr;
-                    var totalShafts = Math.ceil(totalOccupantsPerFloor / 1000);
+                    var totalShafts = Math.floor(totalOccupantsPerFloor / 1000);
                     var basementsNbr = parseInt(document.getElementsByName("basementsNbr" + buildingLetter)[0].value);
                     var totalStories = floorsNbr + basementsNbr;
-                    var elevatorCollumns = Math.ceil(totalStories / 20);
-                    if (elevatorCollumns === 0) elevatorCollumns = 1;
-                    var totalElevators = totalShafts / elevatorCollumns;
+                    var elevatorCollumns = Math.floor(totalStories / 20);
+                    if (elevatorCollumns < 1) elevatorCollumns = 1;
+                    var totalElevators = Math.round(totalShafts / elevatorCollumns);
 
-                    if (floorsNbr < 2 && basementsNbr < 1) document.getElementById("recommendedShafts").value = 0;
                     if (isNaN(totalElevators) || isNaN(totalShafts)) return;
-                    else document.getElementById("recommendedShafts").value = Math.ceil(totalShafts);
-                    document.getElementById("recommendedShafts").value = Math.ceil(totalElevators);
+                    else {
+                        document.getElementById("recommendedShafts").value = Math.ceil(totalShafts);
+                        document.getElementById("recommendedShafts").value = Math.ceil(totalElevators);
+                    }
+                    if (floorsNbr < 2 && basementsNbr < 1) document.getElementById("recommendedShafts").value = 0;
                     break;
                 default:
                     if (window.location.href.includes("prefill=")) {

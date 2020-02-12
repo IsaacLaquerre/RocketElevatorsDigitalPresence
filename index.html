@@ -4,8 +4,8 @@
 		<link rel="icon" type="image/png" href="assets/images/favicon.png">
 		<meta charset="utf-8" />
 		<title>Rocket Elevators - Home</title>
-		<meta name="description" content="Rocket Elevators - Home" />
-		<meta name="Author" content="Isaac Laquerre [www.codeboxx.biz]" />
+		<meta name="description" content="Welcome to Rocket Elevators!" />
+		<meta name="Author" content="Isaac Laquerre - Vyle" />
 
 		<!-- mobile settings -->
 		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
@@ -104,11 +104,46 @@
 			}
 		</style>
 		<script>
-			if (document.cookie === "EN" && document.location.href != "https://rocketelevatorsil.com/index.html") {
-				document.location.href = "https://rocketelevatorsil.com/index.html";
+		    if (window.location.href.startsWith("https://www.rocketelevatorsil.com")) document.location.href = window.location.href.replace("www.", "");
+			if (document.cookie === "EN" && window.location.href != "https://rocketelevatorsil.com/index.html" && !window.location.href.includes("#")) {
+    			var link = "./index.html";
+    			if (document.location.href.includes("#")) {
+    				var frsublink = document.location.href.split("#")[1];
+    				var ensublink;
+    				switch(ensublink) {
+    					case "attributions":
+    						ensublink = "awards";
+    					break;
+    					case "actualites":
+    						ensublink = "news";
+    					break;
+    					default:
+    						ensublink = frsublink;
+    					break;
+    				}
+    				if (ensublink != "#") link += "#" + ensublink;
+    			}
+    			document.location.href = link;
 			}
-			else if (document.cookie === "FR" && document.location.href != "https://rocketelevatorsil.com/index-fr.html") {
-				document.location.href = "https://rocketelevatorsil.com/index-fr.html";
+			else if (document.cookie === "FR" && window.location.href != "https://rocketelevatorsil.com/index-fr.html" && !window.location.href.includes("#")) {
+    			var link = "./index-fr.html";
+    			if (document.location.href.includes("#")) {
+    				var ensublink = document.location.href.split("#")[1];
+    				var frsublink;
+    				switch(ensublink) {
+    					case "awards":
+    						frsublink = "attributions";
+    					break;
+    					case "news":
+    						frsublink = "actualites";
+    					break;
+    					default:
+    						frsublink = ensublink;
+    					break;
+    				}
+    				if (frsublink != "#") link += "#" + frsublink;
+    			}
+    			document.location.href = link;
 			}
 			function triggeredKey(e) {
 				var pattern=/^[0-9-]+$/g;
@@ -122,8 +157,27 @@
 			}
 			function switchLanguage(value) {
 				document.cookie = value;
-				if (value === "FR") document.location.href = './index-fr.html';
-				else return;
+				if (value === "FR") {
+					var link = "https://rocketelevatorsil.com/index-fr.html";
+					if (document.location.href.includes("#")) {
+						var ensublink = document.location.href.split("#")[1];
+						var frsublink;
+						switch(ensublink) {
+							case "awards":
+								frsublink = "attributions";
+							break;
+							case "news":
+								frsublink = "actualites";
+							break;
+							default:
+								frsublink = ensublink;
+							break;
+						}
+						if (frsublink != "#") link += "#" + frsublink;
+					}
+					document.location.href = link;
+					console.log(ensublink);
+				}else return;
 			}
 		</script>
 	</head>
@@ -1094,7 +1148,7 @@
 							<!-- Alert Failed -->
 							<div id="alert_failed" class="alert alert-danger mb-30">
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								<strong>[SMTP] Error!</strong> Internal server error!
+								<strong>[SMTP] Whoops!</strong> Internal server error!
 							</div><!-- /Alert Failed -->
 
 
@@ -1105,7 +1159,7 @@
 							</div><!-- /Alert Mandatory -->
 
 
-							<form action="contact.php" method="post" enctype="multipart/form-data" target="_blank">
+							<form action="#alert_failed" method="post" enctype="multipart/form-data">
 								<fieldset>
 									<input type="hidden" name="action" value="contact_send" />
 
